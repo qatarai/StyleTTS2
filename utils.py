@@ -166,6 +166,7 @@ def split_and_recombine_text(text, desired_length=200, max_length=300):
 
 
 voice_style_names = [
+    "f-qa-1",
     "f-us-1",
     "f-us-2",
     "f-us-3",
