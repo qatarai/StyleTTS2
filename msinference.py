@@ -1,7 +1,10 @@
 import os
+import shutil
 
 import nltk
 from cached_path import cached_path
+
+from tts.utils import voice_style_names
 
 nltk.download("punkt")
 nltk.download("punkt_tab")
@@ -173,6 +176,12 @@ voice_styles = {
 }
 
 
+def add_voice(path) -> None:
+    name = os.path.basename(path).split(".")[0]
+    voice_style_names.append(name)
+    voice_styles[name] = compute_style(path)
+
+
 def inference(
     text,
     s_prev=None,
@@ -220,7 +229,7 @@ def inference(
         d_en = model.bert_encoder(bert_dur).transpose(-1, -2)
 
         if s_ref is None:
-            s_ref = voice_styles[voice_style_names[0]]
+            s_ref = list(voice_styles.values())[0]
 
         if s_ref.shape[0] == 1 and batch_size > 1:
             s_ref = s_ref.expand(batch_size, -1)

@@ -176,6 +176,3 @@ voice_style_names = [
     "m-us-3",
     "m-us-4",
 ]
-voice_style_name_to_index = {
-    name: index for index, name in enumerate(voice_style_names)
-}
